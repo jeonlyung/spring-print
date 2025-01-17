@@ -8,6 +8,7 @@ public class SpringPrintApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringPrintApplication.class, args);
+		System.out.println("Main 테스트");
 	}
 
 }
