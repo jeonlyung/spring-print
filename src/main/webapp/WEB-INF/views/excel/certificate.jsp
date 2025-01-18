@@ -69,7 +69,6 @@
     function fnGoCertificate(){
         location.href = "/cert/certificate.do";
     }
-    
 </script>
 
 </html>

@@ -23,17 +23,21 @@ public class ConvertController {
 
     @GetMapping("/excelToImage")
     public ResponseEntity<byte[]> convertExcelToImage() {
+        // ResponseEntity<byte[]> 이미지 데이터 같은 이진 데이터를 반환시키기 위한 타입
+
         String excelFilePath = ""; // 엑셀 파일 경로
-        //String outputImagePath = ""; // 출력 이미지 파일 경로
+        // String outputImagePath = ""; // 출력 이미지 파일 경로
 
         try (FileInputStream fis = new FileInputStream(excelFilePath);
              Workbook workbook = new XSSFWorkbook(fis)) {
 
+            // 엑셀 파일의 첫 번째 시트 Get
             Sheet sheet = workbook.getSheetAt(0);
 
             int imageWidth = 800;
             int imageHeight = 600;
             BufferedImage image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_ARGB);
+            // 그래픽 객체 생성
             Graphics2D graphics = image.createGraphics();
             graphics.setColor(Color.WHITE);
             graphics.fillRect(0, 0, imageWidth, imageHeight);
@@ -53,13 +57,16 @@ public class ConvertController {
                 startY += rowHeight;
             }
 
+            // 그래픽 객체 자원 해제
             graphics.dispose();
             
             // ByteArrayOutputStream을 사용하여 BufferedImage를 byte[]로 변환
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ImageIO.write(image, "png", baos);  // BufferedImage를 바이트 스트림에 쓰기
+            // BufferedImage를 바이트 스트림에 쓰기
+            ImageIO.write(image, "png", baos);  
             baos.flush();
-            byte[] imageBytes = baos.toByteArray();  // 바이트 배열로 변환
+            // 바이트 배열로 변환
+            byte[] imageBytes = baos.toByteArray();  
             baos.close();
 
             return ResponseEntity.ok()
