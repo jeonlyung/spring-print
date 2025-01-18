@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -16,10 +17,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+@RequestMapping("/convert")
 @Controller
 public class ConvertController {
 
-    @GetMapping("/convert")
+    @GetMapping("/excelToImage")
     public ResponseEntity<byte[]> convertExcelToImage() {
         String excelFilePath = ""; // 엑셀 파일 경로
         //String outputImagePath = ""; // 출력 이미지 파일 경로
